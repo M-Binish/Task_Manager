@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Authentication Section -->
+<div id="auth-section" class="max-w-md mx-auto">
+    <div class="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/20">
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <i class="fas fa-rocket text-white text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome to TaskMaster</h2>
+            <p class="text-gray-600">Organize your life, one task at a time</p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-section">
+            <form id="login-form" class="space-y-6">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" name="username" class="form-input" placeholder="Enter your username" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">Don't have an account?</p>
+                <button id="show-register" class="text-purple-600 hover:text-purple-700 font-medium transition-colors">
+                    Create one here
+                </button>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-section" class="hidden">
+            <form id="register-form" class="space-y-6">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" name="username" class="form-input" placeholder="Choose a username" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" name="password" class="form-input" placeholder="Choose a password" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full">
+                    <i class="fas fa-user-plus mr-2"></i>Create Account
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">Already have an account?</p>
+                <button id="show-login" class="text-purple-600 hover:text-purple-700 font-medium transition-colors">
+                    Sign in here
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Section -->
+<div id="dashboard-section" class="hidden">
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="stat-card">
+            <div class="stat-icon bg-gradient-to-r from-blue-500 to-blue-600">
+                <i class="fas fa-list"></i>
+            </div>
+            <div>
+                <p class="stat-label">Total Tasks</p>
+                <p class="stat-value" id="total-tasks">0</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon bg-gradient-to-r from-yellow-500 to-orange-500">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div>
+                <p class="stat-label">Pending</p>
+                <p class="stat-value" id="pending-tasks">0</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon bg-gradient-to-r from-purple-500 to-purple-600">
+                <i class="fas fa-spinner"></i>
+            </div>
+            <div>
+                <p class="stat-label">In Progress</p>
+                <p class="stat-value" id="progress-tasks">0</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon bg-gradient-to-r from-green-500 to-green-600">
+                <i class="fas fa-check"></i>
+            </div>
+            <div>
+                <p class="stat-label">Completed</p>
+                <p class="stat-value" id="completed-tasks">0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Management -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Create Task Form -->
+        <div class="lg:col-span-1">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-plus mr-2"></i>Create New Task
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form id="create-task-form" class="space-y-4">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" class="form-input" placeholder="Enter task title" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-input" rows="3" placeholder="Enter task description" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Priority</label>
+                            <select name="priority" class="form-input">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full">
+                            <i class="fas fa-plus mr-2"></i>Add Task
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task List -->
+        <div class="lg:col-span-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-tasks mr-2"></i>Your Tasks
+                    </h3>
+                    <div class="flex items-center space-x-3">
+                        <!-- Search -->
+                        <div class="relative">
+                            <input type="text" id="search-input" class="form-input-sm pl-10" placeholder="Search tasks...">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        
+                        <!-- Filters -->
+                        <select id="status-filter" class="form-input-sm">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        
+                        <select id="priority-filter" class="form-input-sm">
+                            <option value="">All Priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div id="tasks-loading" class="text-center py-8 hidden">
+                        <div class="spinner mx-auto mb-4"></div>
+                        <p class="text-gray-600">Loading tasks...</p>
+                    </div>
+                    
+                    <div id="tasks-empty" class="text-center py-12 hidden">
+                        <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clipboard-list text-gray-400 text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 text-lg font-medium mb-2">No tasks found</p>
+                        <p class="text-gray-500">Create your first task to get started!</p>
+                    </div>
+                    
+                    <div id="tasks-list" class="space-y-3"></div>
+                    
+                    <!-- Pagination -->
+                    <div id="pagination" class="flex justify-between items-center mt-6 pt-6 border-t border-gray-200">
+                        <button id="prev-page" class="btn-secondary" disabled>
+                            <i class="fas fa-chevron-left mr-2"></i>Previous
+                        </button>
+                        <span id="page-info" class="text-gray-600 font-medium"></span>
+                        <button id="next-page" class="btn-secondary">
+                            Next<i class="fas fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Task Edit Modal -->
+<div id="edit-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
+    <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-semibold">Edit Task</h3>
+            <button id="close-modal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="edit-task-form" class="space-y-4">
+            <input type="hidden" id="edit-task-id">
+            
+            <div class="form-group">
+                <label class="form-label">Title</label>
+                <input type="text" id="edit-title" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea id="edit-description" class="form-input" rows="3" required></textarea>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select id="edit-status" class="form-input">
+                        <option value="pending">Pending</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select id="edit-priority" class="form-input">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex space-x-3 pt-4">
+                <button type="submit" class="btn-primary flex-1">
+                    <i class="fas fa-save mr-2"></i>Save Changes
+                </button>
+                <button type="button" id="cancel-edit" class="btn-secondary flex-1">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
